@@ -1,6 +1,4 @@
-import functionOne from './modules/one';
-import functionTwo from './modules/two';
+import timer from './modules/timer';
 
-functionOne();
-functionTwo();
+timer('31 october 2021');
 
