@@ -6,7 +6,6 @@ const modal = () => {
     const closeBtn = modal.querySelector('.popup-close');
     let opacityCounter = 0;
     let windowWidth = window.innerWidth;
-    console.log('width is :', windowWidth);
 
 
     const getModalOpacityEffect = () => {
@@ -23,11 +22,9 @@ const modal = () => {
         modal.style.opacity = 0;
 
         if (windowWidth > 767) {
-          console.log('больше 768px');
           modal.style.display = 'block';
           getModalOpacityEffect();
         } else {
-          console.log('меньше 768px');
           modal.style.display = 'block';
         }
       });
