@@ -16,12 +16,21 @@ const timer = (deadline) => {
     return { timeRemaining, hours, minutes, seconds };
   };
 
+  const getZeroBeforeNumber = (timeItem) => {
+    if (String(timeItem).length > 1) {
+      return timeItem;
+    } else {
+      timeItem = ('00' + timeItem).slice(-2);
+    }
+    return timeItem;
+  };
+
   const updateClock = () => {
     let getTime = getTimeRemaining();
 
-    timerHours.textContent = String(getTime.hours).length > 1 ? getTime.hours : '0' + getTime.hours;
-    timerMinutes.textContent = ('00' + getTime.minutes).slice(-2);
-    timerSeconds.textContent = ('00' + getTime.seconds).slice(-2);
+    timerHours.textContent = getZeroBeforeNumber(getTime.hours);
+    timerMinutes.textContent = getZeroBeforeNumber(getTime.minutes);
+    timerSeconds.textContent = getZeroBeforeNumber(getTime.seconds);
 
     if (getTime.timeRemaining <= 0) {
 
