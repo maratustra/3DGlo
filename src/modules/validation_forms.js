@@ -1,73 +1,80 @@
 const validationForms = () => {
-  const formMainPage = document.querySelector("#form1");
-  const formFooter = document.querySelector("#form2");
-  const formModal = document.querySelector("#form3");
+  const userInputs = document.querySelectorAll('.form-name');
+  const emailInputs = document.querySelectorAll('.form-email');
+  const phoneInputs = document.querySelectorAll('.form-phone');
+  const messageInput = document.querySelector('#form2-message');
+  const forms = document.querySelectorAll('form');
   let isError = false;
 
-  const userValidation = (e) => {
-    if (/^[а-яА-Я\s-]+$/g.test(e.value) && e.value != "") {
-      alert('В поле Имя разрешена только кириллица в любом регистре, дефис и пробел');
-    } else {
+  const userValidation = (input) => {
+
+    if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
+      input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
       return isError = true;
+    } else {
+      return isError = false;
     }
   };
 
-  const emailValidation = (e) => {
-    if (/^([A-Za-z0-9_\--.!~*'])+\@([A-Za-z0-9_\-.!~*'])+\.([A-Za-z]{2,4})$/g.test(e.value) && e.value != "") {
-      alert("В поле Email только латиница и спецсимволы @  -  _  .  ! ~ * '");
-    } else {
+  const emailValidation = (input) => {
+
+    if (/[^A-Za-z0-9_\--.!~*'@]/g.test(input.value)) {
+      input.value = input.value.replace(/[^A-Za-z0-9_\--.!~*'@]/g, "");
       return isError = true;
+    } else {
+      return isError = false;
     }
   };
 
-  const phoneValidation = (e) => {
-    if (!/[^\d+()-]/g.test(e.value) && e.value != "") {
-      alert('В поле Телефон только цифры, круглые скобки, дефис и плюс');
-    } else {
+  const phoneValidation = (input) => {
+
+    if (/[^\d+()-]/g.test(input.value)) {
+      input.value = input.value.replace(/[^\d+()-]/g, "");
       return isError = true;
+    } else {
+      return isError = false;
     }
   };
 
-  const messageValidation = (e) => {
-    if (!/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu.test(e.value)) {
-      alert('В поле Сообщение разрешена кириллица в любом регистре и любые знаки препинания');
-    } else {
+  const messageValidation = (input) => {
+    if (/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu.test(input.value)) {
+      input.value = input.value.replace(/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu, "");
       return isError = true;
+    } else {
+      return isError = false;
     }
   };
 
-  formMainPage.addEventListener('submit', (e) => {
-    e.preventDefault();
+  forms.forEach((eachSubmitForm) => {
+    eachSubmitForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    userValidation(e.target[0]);
-    emailValidation(e.target[1]);
-    phoneValidation(e.target[2]);
+      if (!isError) alert('Данные отправлены');
+      else isError = true;
+    });
 
-    if (!isError) alert('Данные отправлены');
-    else isError = true;
-  });
+    userInputs.forEach((eachUserInput) => {
+      eachUserInput.addEventListener('input', (event) => {
+        userValidation(event.target);
+      });
+    });
 
-  formFooter.addEventListener('submit', (e) => {
-    e.preventDefault();
+    emailInputs.forEach((eachEmailInput) => {
+      eachEmailInput.addEventListener('input', (event) => {
+        emailValidation(event.target);
+      });
+    });
 
-    userValidation(e.target[0]);
-    emailValidation(e.target[1]);
-    phoneValidation(e.target[2]);
-    messageValidation(e.target[3]);
+    phoneInputs.forEach((eachPhoneInput) => {
+      eachPhoneInput.addEventListener('input', (event) => {
+        phoneValidation(event.target);
+      });
+    });
 
-    if (!isError) alert('Данные отправлены');
-    else isError = true;
-  });
+    messageInput.addEventListener('input', (event) => {
+      messageValidation(event.target);
+    });
 
-  formModal.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    userValidation(e.target[0]);
-    emailValidation(e.target[1]);
-    phoneValidation(e.target[2]);
-
-    if (!isError) alert('Данные отправлены');
-    else isError = true;
   });
 };
 
