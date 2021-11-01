@@ -11,48 +11,49 @@ const validationForms = () => {
     input.addEventListener('blur', () => {
       if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
         input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
-        error.innerHTML = 'Пожалуйста, заполните поле правильно';
         return isError = true;
       } else {
+        let nameUpperCase = input.value[0].toUpperCase() + input.value.slice(1);
+        input.value = nameUpperCase.trim().replace(/\s+/g, " ");
         return isError = false;
       }
-    }, true);
-
-    // if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
-    //   input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
-    //   return isError = true;
-    // } else {
-    //   return isError = false;
-    // }
+    });
   };
 
   const emailValidation = (input) => {
-
-    if (/[^A-Za-z0-9_\--.!~*'@]/g.test(input.value)) {
-      input.value = input.value.replace(/[^A-Za-z0-9_\--.!~*'@]/g, "");
-      return isError = true;
-    } else {
-      return isError = false;
-    }
+    input.addEventListener('blur', () => {
+      if (/[^A-Za-z0-9_\--.!~*'@]/g.test(input.value)) {
+        input.value = input.value.replace(/[^A-Za-z0-9_\--.!~*'@]/g, "");
+        return isError = true;
+      } else {
+        input.value = input.value.trim().replace(/\s+/g, " ");
+        return isError = false;
+      }
+    });
   };
 
   const phoneValidation = (input) => {
-
-    if (/[^\d+()-]/g.test(input.value)) {
-      input.value = input.value.replace(/[^\d+()-]/g, "");
-      return isError = true;
-    } else {
-      return isError = false;
-    }
+    input.addEventListener('blur', () => {
+      if (/[^\d+()-]/g.test(input.value)) {
+        input.value = input.value.replace(/[^\d+()-]/g, "");
+        return isError = true;
+      } else {
+        input.value = input.value.trim().replace(/\s+/g, " ");
+        return isError = false;
+      }
+    });
   };
 
   const messageValidation = (input) => {
-    if (/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu.test(input.value)) {
-      input.value = input.value.replace(/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu, "");
-      return isError = true;
-    } else {
-      return isError = false;
-    }
+    input.addEventListener('blur', () => {
+      if (/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu.test(input.value)) {
+        input.value = input.value.replace(/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu, "");
+        return isError = true;
+      } else {
+        input.value = input.value.trim().replace(/\s+/g, " ");
+        return isError = false;
+      }
+    });
   };
 
 
