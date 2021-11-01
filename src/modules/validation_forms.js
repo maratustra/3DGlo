@@ -6,14 +6,24 @@ const validationForms = () => {
   const forms = document.querySelectorAll('form');
   let isError = false;
 
-  const userValidation = (input) => {
 
-    if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
-      input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
-      return isError = true;
-    } else {
-      return isError = false;
-    }
+  const userValidation = (input) => {
+    input.addEventListener('blur', () => {
+      if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
+        input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
+        error.innerHTML = 'Пожалуйста, заполните поле правильно';
+        return isError = true;
+      } else {
+        return isError = false;
+      }
+    }, true);
+
+    // if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
+    //   input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
+    //   return isError = true;
+    // } else {
+    //   return isError = false;
+    // }
   };
 
   const emailValidation = (input) => {
@@ -44,6 +54,7 @@ const validationForms = () => {
       return isError = false;
     }
   };
+
 
   forms.forEach((eachSubmitForm) => {
     eachSubmitForm.addEventListener('submit', (e) => {
