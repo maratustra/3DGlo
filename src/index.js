@@ -4,6 +4,7 @@ import modal from './modules/modal';
 import validationForms from './modules/validation_forms';
 import calculator from './modules/calculator';
 import sliderSwiper from './modules/sliderSwiper';
+import tabs from './modules/tabs';
 
 
 timer('29 december 2021');
@@ -12,4 +13,5 @@ validationForms();
 modal();
 calculator();
 sliderSwiper();
+tabs();
 
