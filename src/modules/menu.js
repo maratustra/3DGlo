@@ -1,7 +1,7 @@
 const menu = () => {
-  const menuBtn = document.querySelector('.menu');
   const menu = document.querySelector('menu');
   const scrollBtn = document.querySelector("a[href='#service-block']");
+  const body = document.querySelector('body');
 
 
   const handleMenu = () => {
@@ -16,19 +16,23 @@ const menu = () => {
   };
 
 
-  menu.addEventListener('click', (e) => {
-    if (e.target.className === "close-btn") {
+  body.addEventListener('click', (e) => {
+    console.log(e.target);
+
+    if (e.target.closest('.menu')) {
+      handleMenu();
+    } else if (e.target.matches(".close-btn")) {
       handleMenu(e.target);
-    } else if (e.target.tagName === "A") {
+    } else if (e.target.matches('menu a')) {
       handleMenu(e.target);
       e.preventDefault();
 
       const blockID = e.target.getAttribute('href').substr(1);
       smoothScrollMenu(blockID);
+    } else {
+      menu.classList.toggle('active-menu');
     }
   });
-
-  menuBtn.addEventListener('click', handleMenu);
 
   scrollBtn.addEventListener('click', (e) => {
     e.preventDefault();
