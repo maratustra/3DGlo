@@ -32,9 +32,7 @@ const slider = () => {
     prevSlide(dots, currentSlide, 'dot-active');
     currentSlide++;
 
-    if (currentSlide >= slides.length) {
-      currentSlide = 0;
-    }
+    if (currentSlide >= slides.length) currentSlide = 0;
 
     nextSlide(slides, currentSlide, 'portfolio-item-active');
     nextSlide(dots, currentSlide, 'dot-active');
@@ -44,39 +42,28 @@ const slider = () => {
     interval = setInterval(autoSlide, timer);
   };
 
-  const stopSlide = () => {
-    clearInterval(interval);
-  };
+  const stopSlide = () => clearInterval(interval);
 
 
   sliderBlock.addEventListener('click', (e) => {
     e.preventDefault();
 
-    if (!e.target.matches('.dot, .portfolio-btn')) {
-      return;
-    }
+    if (!e.target.matches('.dot, .portfolio-btn')) return;
 
     prevSlide(slides, currentSlide, 'portfolio-item-active');
     prevSlide(dots, currentSlide, 'dot-active');
 
-    if (e.target.matches('#arrow-right')) {
-      currentSlide++;
-    } else if (e.target.matches('#arrow-left')) {
-      currentSlide--;
-    }
-    else if (e.target.classList.contains('dot')) {
+    if (e.target.matches('#arrow-right')) currentSlide++;
+    if (e.target.matches('#arrow-left')) currentSlide--;
+    if (e.target.classList.contains('dot')) {
       dots.forEach((dot, index) => {
-        if (e.target === dot) {
-          currentSlide = index;
-        }
+        if (e.target === dot) currentSlide = index;
       });
     }
 
-    if (currentSlide >= slides.length) {
-      currentSlide = 0;
-    } else if (currentSlide < 0) {
-      currentSlide = slides.length - 1;
-    }
+    if (currentSlide >= slides.length) currentSlide = 0;
+    if (currentSlide < 0) currentSlide = slides.length - 1;
+
 
     nextSlide(slides, currentSlide, 'portfolio-item-active');
     nextSlide(dots, currentSlide, 'dot-active');
