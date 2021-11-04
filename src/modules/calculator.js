@@ -4,7 +4,24 @@ const calculator = (price = 100) => {
   const calcSquare = document.querySelector('.calc-square');
   const calcCount = document.querySelector('.calc-count');
   const calcDay = document.querySelector('.calc-day');
-  const total = document.getElementById('total');
+  const totalContainer = document.getElementById('total');
+
+
+  const updateCounter = (counter, value) => counter.textContent = value;
+
+  const updateTotal = (totalValue) => {
+    const targetSum = totalValue;
+    let currentSum = +totalContainer.textContent;
+    const increment = targetSum / 100;
+
+    if (currentSum < targetSum) {
+      updateCounter(totalContainer, Math.ceil(currentSum + increment));
+      setTimeout(() => updateTotal(totalValue), 10);
+    } else {
+      updateCounter(totalContainer, targetSum);
+      totalContainer.textContent = currentSum;
+    }
+  };
 
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -26,15 +43,15 @@ const calculator = (price = 100) => {
 
     if (calcType.value && calcSquare.value) {
       totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
+      updateTotal(totalValue);
     } else {
       totalValue = 0;
+      totalContainer.textContent = totalValue;
     }
-
-    total.textContent = totalValue;
   };
 
 
-  calcBlock.addEventListener('input', (e) => {
+  calcBlock.addEventListener('change', (e) => {
     if (/[^\d\.]$/g.test(e.target.value)) {
       e.target.value = e.target.value.replace(/[^\d\.]+$/g, "");
     }
