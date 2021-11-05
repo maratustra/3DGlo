@@ -53,7 +53,6 @@ const calculator = (price = 100) => {
 
     countCalc();
   });
-
 };
 
 export default calculator;
