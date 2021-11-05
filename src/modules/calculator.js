@@ -1,3 +1,5 @@
+import { animate } from './helpers';
+
 const calculator = (price = 100) => {
   const calcBlock = document.querySelector('.calc-block');
   const calcType = document.querySelector('.calc-type');
@@ -6,22 +8,6 @@ const calculator = (price = 100) => {
   const calcDay = document.querySelector('.calc-day');
   const totalContainer = document.getElementById('total');
 
-
-  const updateCounter = (counter, value) => counter.textContent = value;
-
-  const updateTotal = (totalValue) => {
-    const targetSum = totalValue;
-    let currentSum = +totalContainer.textContent;
-    const increment = targetSum / 100;
-
-    if (currentSum < targetSum) {
-      updateCounter(totalContainer, Math.ceil(currentSum + increment));
-      setTimeout(() => updateTotal(totalValue), 10);
-    } else {
-      updateCounter(totalContainer, targetSum);
-      totalContainer.textContent = currentSum;
-    }
-  };
 
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -43,7 +29,16 @@ const calculator = (price = 100) => {
 
     if (calcType.value && calcSquare.value) {
       totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
-      updateTotal(totalValue);
+
+      animate({
+        duration: 100,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          totalContainer.textContent = Math.ceil(totalValue * progress);
+        }
+      });
     } else {
       totalValue = 0;
       totalContainer.textContent = totalValue;
