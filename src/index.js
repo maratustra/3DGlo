@@ -15,5 +15,15 @@ modal();
 calculator(110);
 sliderSwiper();
 tabs();
-slider();
+slider({
+  sliderBlockClass: 'portfolio-content',
+  slidesClass: 'portfolio-item',
+  slideActiveClass: 'portfolio-item-active',
+  sliderButtonsClass: 'portfolio-btn',
+  arrowLeftClass: 'prev',
+  arrowRightClass: 'next',
+  dotsContainerClass: 'portfolio-dots',
+  dotClass: 'dot',
+  dotActiveClass: 'dot-active',
+});
 
