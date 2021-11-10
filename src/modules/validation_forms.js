@@ -4,66 +4,43 @@ const validationForms = () => {
   const phoneInputs = document.querySelectorAll('.form-phone');
   const messageInput = document.querySelector('#form2-message');
   const forms = document.querySelectorAll('form');
-  let isError = false;
 
 
   const userValidation = (input) => {
-    input.addEventListener('blur', () => {
-      if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
-        input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
-        return isError = true;
-      } else {
-        let nameUpperCase = input.value[0].toUpperCase() + input.value.slice(1);
-        input.value = nameUpperCase.trim().replace(/\s+/g, " ");
-        return isError = false;
-      }
-    });
+    if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
+      input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
+    } else if (input.value.length > 0) {
+      let nameUpperCase = input.value[0].toUpperCase() + input.value.slice(1);
+      input.value = nameUpperCase.trim().replace(/\s+/g, " ");
+    }
   };
 
   const emailValidation = (input) => {
-    input.addEventListener('blur', () => {
-      if (/[^A-Za-z0-9_\--.!~*'@]/g.test(input.value)) {
-        input.value = input.value.replace(/[^A-Za-z0-9_\--.!~*'@]/g, "");
-        return isError = true;
-      } else {
-        input.value = input.value.trim().replace(/\s+/g, " ");
-        return isError = false;
-      }
-    });
+    if (/[^A-Za-z0-9_\--.!~*'@]/g.test(input.value)) {
+      input.value = input.value.replace(/[^A-Za-z0-9_\--.!~*'@]/g, "");
+    } else {
+      input.value = input.value.trim().replace(/\s+/g, " ");
+    }
   };
 
   const phoneValidation = (input) => {
-    input.addEventListener('blur', () => {
-      if (/[^\d+()-]/g.test(input.value)) {
-        input.value = input.value.replace(/[^\d+()-]/g, "");
-        return isError = true;
-      } else {
-        input.value = input.value.trim().replace(/\s+/g, " ");
-        return isError = false;
-      }
-    });
+    if (/[^\d+()-]/g.test(input.value)) {
+      input.value = input.value.replace(/[^\d+()-]/g, "");
+    } else {
+      input.value = input.value.trim().replace(/\s+/g, " ");
+    }
   };
 
   const messageValidation = (input) => {
-    input.addEventListener('blur', () => {
-      if (/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu.test(input.value)) {
-        input.value = input.value.replace(/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu, "");
-        return isError = true;
-      } else {
-        input.value = input.value.trim().replace(/\s+/g, " ");
-        return isError = false;
-      }
-    });
+    if (/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu.test(input.value)) {
+      input.value = input.value.replace(/[^а-яА-Я\s._^%$#!?~@,:;()"-]$/gu, "");
+    } else {
+      input.value = input.value.trim().replace(/\s+/g, " ");
+    }
   };
 
 
-  forms.forEach((eachSubmitForm) => {
-    eachSubmitForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      if (!isError) alert('Данные отправлены');
-      else isError = true;
-    });
+  forms.forEach(() => {
 
     userInputs.forEach((eachUserInput) => {
       eachUserInput.addEventListener('input', (event) => {

@@ -6,6 +6,7 @@ import calculator from './modules/calculator';
 import sliderSwiper from './modules/sliderSwiper';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
+import sendForm from './modules/sendForm';
 
 
 timer('29 december 2021');
@@ -25,5 +26,14 @@ slider({
   dotsContainerClass: 'portfolio-dots',
   dotClass: 'dot',
   dotActiveClass: 'dot-active',
+});
+sendForm({
+  form: 'form',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    }
+  ],
 });
 

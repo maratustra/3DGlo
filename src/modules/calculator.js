@@ -46,7 +46,7 @@ const calculator = (price = 100) => {
   };
 
 
-  calcBlock.addEventListener('change', (e) => {
+  calcBlock.addEventListener('input', (e) => {
     if (/[^\d\.]$/g.test(e.target.value)) {
       e.target.value = e.target.value.replace(/[^\d\.]+$/g, "");
     }
