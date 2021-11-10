@@ -6,7 +6,7 @@ import calculator from './modules/calculator';
 import sliderSwiper from './modules/sliderSwiper';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
-import sendForm from './modules/sendForm';
+import sendForm from './modules/send_form';
 
 
 timer('29 december 2021');
