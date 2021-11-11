@@ -18,20 +18,21 @@ const menu = () => {
   body.addEventListener('click', (e) => {
 
     if (e.target.closest('.menu')) handleMenu();
-    if (e.target.matches(".close-btn")) handleMenu(e.target);
-    if (e.target.matches("a#service-block")) {
+    else if (e.target.matches(".close-btn")) handleMenu(e.target);
+    else if (e.target.matches("a#service-block")) {
       e.preventDefault();
 
       const blockID = e.target.parentNode.getAttribute('href').substr(1);
       smoothScrollMenu(blockID);
     }
-    if (e.target.matches('menu a')) {
+    else if (e.target.matches('menu a')) {
       handleMenu(e.target);
       e.preventDefault();
 
       const blockID = e.target.getAttribute('href').substr(1);
       smoothScrollMenu(blockID);
-    } else menu.classList.remove('active-menu');
+    }
+    else menu.classList.remove('active-menu');
   });
 };
 

@@ -3,10 +3,19 @@ import { validate } from "schema-utils";
 const sendForm = ({ form, someElem = [] }) => {
   const forms = document.querySelectorAll(form);
   const statusBlock = document.createElement('div');
-  const loadText = 'Идет загрузка';
+  const loader = document.querySelector('.loaderArea');
   const errorText = 'Ошибка!';
   const successText = 'Спасибо! Наш менеджер с вами свяжется';
+  statusBlock.style.color = 'white';
 
+
+  const showLoading = () => {
+    loader.style.display = 'block';
+  };
+
+  const hideLoading = () => {
+    loader.style.display = 'none';
+  };
 
   const sendData = (data) => {
     return fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -21,9 +30,6 @@ const sendForm = ({ form, someElem = [] }) => {
   const submitForm = (form) => {
     const formData = new FormData(form);
     const formBody = {};
-
-    statusBlock.textContent = loadText;
-    form.append(statusBlock);
 
     formData.forEach((value, key) => {
       formBody[key] = value;
@@ -40,20 +46,27 @@ const sendForm = ({ form, someElem = [] }) => {
       }
     });
 
+    showLoading();
+
     sendData(formBody)
-      .then(data => statusBlock.textContent = successText)
-      .catch(error => statusBlock.textContent = errorText);
+      .then(data => {
+        statusBlock.textContent = successText;
+        form.append(statusBlock);
+      })
+      .catch(error => {
+        statusBlock.textContent = errorText;
+        form.append(statusBlock);
+      })
+      .finally(() => hideLoading());
   };
 
   try {
     forms.forEach((form) => {
-      if (!form) throw new Error('Верните, пожалуйста, форму!');
-
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         submitForm(e.target);
-        setTimeout(() => form.reset(), 1000);
+        setTimeout(() => form.reset(), 2500);
       });
     })
   } catch (error) {
