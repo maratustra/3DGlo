@@ -53,6 +53,7 @@ const sendForm = ({ form, someElem = [] }) => {
         e.preventDefault();
 
         submitForm(e.target);
+        setTimeout(() => form.reset(), 1000);
       });
     })
   } catch (error) {

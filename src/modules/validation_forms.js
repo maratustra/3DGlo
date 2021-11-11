@@ -16,10 +16,10 @@ const validationForms = () => {
   };
 
   const emailValidation = (input) => {
-    if (/[^A-Za-z0-9_\--.!~*'@]/g.test(input.value)) {
-      input.value = input.value.replace(/[^A-Za-z0-9_\--.!~*'@]/g, "");
-    } else {
+    if (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(input.value)) {
       input.value = input.value.trim().replace(/\s+/g, " ");
+    } else {
+      input.value = input.value.replace(/[^a-z0-9\+\.\-@]+/g, "");
     }
   };
 
