@@ -6,7 +6,6 @@ const sendForm = ({ form, someElem = [] }) => {
   const loader = document.querySelector('.loaderArea');
   const errorText = 'Ошибка!';
   const successText = 'Спасибо! Наш менеджер с вами свяжется';
-  statusBlock.style.color = 'white';
 
 
   const showLoading = () => {
@@ -51,10 +50,12 @@ const sendForm = ({ form, someElem = [] }) => {
     sendData(formBody)
       .then(data => {
         statusBlock.textContent = successText;
+        statusBlock.style.color = 'white';
         form.append(statusBlock);
       })
       .catch(error => {
         statusBlock.textContent = errorText;
+        statusBlock.style.color = 'red';
         form.append(statusBlock);
       })
       .finally(() => hideLoading());
@@ -65,8 +66,15 @@ const sendForm = ({ form, someElem = [] }) => {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        submitForm(e.target);
-        setTimeout(() => form.reset(), 2500);
+        if (e.target.checkValidity()) {
+
+          submitForm(e.target);
+          setTimeout(() => form.reset(), 2500);
+        } else {
+          statusBlock.textContent = "Введите данные в правильном формате";
+          statusBlock.style.color = 'red';
+          form.append(statusBlock);
+        }
       });
     })
   } catch (error) {

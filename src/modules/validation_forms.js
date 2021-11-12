@@ -8,15 +8,22 @@ const validationForms = () => {
 
   const userValidation = (input) => {
     if (/[^а-яА-Я\s-]+$/g.test(input.value)) {
-      input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, "");
+      input.value = input.value.replace(/[^а-яА-Я\s-]+$/g, '');
+    } else if (/([\s-])\1/g.test(input.value)) {
+      input.value = input.value.replace(/([\s-])\1/g, '');
+    } else if (/-[а-яё]/g.test(input.value)) {
+      input.value = input.value.replace(/-[а-яё]/g, $0 => $0.toUpperCase());
     } else if (input.value.length > 0) {
-      let nameUpperCase = input.value[0].toUpperCase() + input.value.slice(1);
-      input.value = nameUpperCase.trim().replace(/\s+/g, " ");
+      input.value =
+        input.value
+          .split(' ')
+          .map(item => item.length > 0 ? item[0].toUpperCase() + item.substring(1) : '')
+          .join(' ');
     }
   };
 
   const emailValidation = (input) => {
-    if (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(input.value)) {
+    if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi.test(input.value)) {
       input.value = input.value.trim().replace(/\s+/g, " ");
     } else {
       input.value = input.value.replace(/[^a-z0-9\+\.\-@]+/g, "");
@@ -24,9 +31,9 @@ const validationForms = () => {
   };
 
   const phoneValidation = (input) => {
-    if (/[^\d+()-]/g.test(input.value)) {
-      input.value = input.value.replace(/[^\d+()-]/g, "");
-    } else {
+    if (/[^\d+]/g.test(input.value)) {
+      input.value = input.value.replace(/[^\d+]/g, "");
+    } else if (input.value.length >= 11) {
       input.value = input.value.trim().replace(/\s+/g, " ");
     }
   };
